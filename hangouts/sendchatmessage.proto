@@ -1,0 +1,805 @@
+message Requestsendchatmessage {
+  message ClientRequestHeader {
+    message ClientClientVersion {
+      enum client_id_enum {
+        CLIENT_ID_UNKNOWN = 0;
+      }
+
+      enum build_type_enum {
+        BUILD_TYPE_UNKNOWN = 0;
+      }
+
+      optional client_id_enum client_id                 = 1;
+      optional build_type_enum build_type               = 2;
+      optional string major_version                     = 3;
+      optional int64 version                            = 4;
+      optional string device_os_version                 = 5;
+      optional string device_hardware                   = 6;
+      optional int32 android_sdk_api_level              = 7;
+    }
+
+    message ClientClientIdentifier {
+      optional string resource                          = 1;
+      optional string client_id                         = 2;
+      optional string self_fanout_id                    = 3;
+      optional string participant_log_id                = 4;
+    }
+
+    message ClientClientInstrumentationInfo {
+      optional int64 chat_message_sequence_number       = 1;
+      optional string client_request_id                 = 2;
+    }
+
+    message RtcClient {
+      enum device_enum {
+        DEVICE_UNKNOWN = 0;
+      }
+
+      enum application_enum {
+        APPLICATION_UNKNOWN = 0;
+      }
+
+      enum platform_enum {
+        PLATFORM_UNKNOWN = 0;
+      }
+
+      optional device_enum device                       = 1;
+      optional application_enum application             = 2;
+      optional platform_enum platform                   = 3;
+    }
+
+    message ClientCacheHash {
+      optional string update_id                         = 1;
+      optional uint64 hash_diff                         = 2;
+      optional uint64 hash_rollup                       = 3;
+      optional uint64 version                           = 4;
+    }
+
+    optional ClientClientVersion client_version       = 1;
+    optional ClientClientIdentifier client_identifier = 2;
+    optional ClientClientInstrumentationInfo client_instrumentation_info = 3;
+    optional string language_code                     = 4;
+    optional bool request_header                      = 5;
+    optional uint32 retry_attempt                     = 6;
+    optional RtcClient rtc_client                     = 7;
+    optional string client_generated_request_id       = 8;
+    optional ClientCacheHash local_state_hash         = 9;
+  }
+
+  message ClientEventAnnotation {
+    optional int32 type                               = 1;
+    optional string value                             = 2;
+  }
+
+  message ClientMessageContent {
+    message Segment {
+      message Formatting {
+        enum style_enum {
+          STYLE_UNKNOWN = 0;
+        }
+
+        optional bool formatting                          = 1;
+        optional bool formatting                          = 2;
+        optional bool formatting                          = 3;
+        optional bool formatting                          = 4;
+        optional style_enum style                         = 5;
+        optional bool formatting                          = 6;
+      }
+
+      message LinkData {
+        message Attachment {
+          message EmbedClientItem {
+            message DeepLinkData {
+              message PackagingServiceClient {
+                enum type_enum {
+                  TYPE_UNKNOWN = 0;
+                }
+
+                optional type_enum type                           = 1;
+                optional string android_package_name              = 2;
+                optional string ios_bundle_id                     = 3;
+                optional string ios_app_store_id                  = 4;
+              }
+
+              optional int64 app_id                             = 1;
+              optional string deep_link_id                      = 2;
+              repeated PackagingServiceClient client            = 3;
+              optional string url                               = 4;
+            }
+
+            message TransientData {
+            }
+
+            message Provenance {
+              optional uint64 retrieved_timestamp_msec          = 1;
+              optional string input_url                         = 2;
+              optional string retrieved_url                     = 3;
+              optional string canonical_url                     = 4;
+              optional string itemtype                          = 5;
+            }
+
+            enum type_enum {
+              TYPE_UNKNOWN = 0;
+            }
+
+            optional type_enum type                           = 1;
+            optional string id                                = 2;
+            optional string canonical_id                      = 3;
+            optional DeepLinkData deep_link_data              = 4;
+            optional TransientData transient_data             = 5;
+            optional string signature                         = 6;
+            optional Provenance provenance                    = 7;
+            optional string render_id                         = 8;
+          }
+
+          optional EmbedClientItem embed_item               = 1;
+          optional any unknown_any_field                    = 2;
+          optional string id                                = 3;
+        }
+
+        enum attachment_render_hint_enum {
+          ATTACHMENT_RENDER_HINT_UNKNOWN = 0;
+        }
+
+        enum link_type_enum {
+          LINK_TYPE_UNKNOWN = 0;
+        }
+
+        optional string link_target                       = 1;
+        optional string display_url                       = 2;
+        optional Attachment attachment                    = 3;
+        optional string title                             = 4;
+        optional attachment_render_hint_enum attachment_render_hint = 5;
+        optional link_type_enum link_type                 = 6;
+      }
+
+      message UserMentionData {
+        message PrincipalProto {
+          enum scope_enum {
+            SCOPE_UNKNOWN = 0;
+          }
+
+          optional scope_enum scope                         = 1;
+        }
+
+        optional int64 user_gaia_id                       = 1;
+        optional string user_id                           = 2;
+        optional string email                             = 3;
+        optional PrincipalProto user                      = 4;
+      }
+
+      message HashtagData {
+        optional string search_text                       = 1;
+        optional string search_text                       = 2;
+        optional string search_text                       = 3;
+        optional string search_text                       = 4;
+        optional string search_text                       = 5;
+      }
+
+      enum type_enum {
+        TYPE_UNKNOWN = 0;
+      }
+
+      optional type_enum type                           = 1;
+      optional string text                              = 2;
+      optional Formatting formatting                    = 3;
+      optional LinkData link_data                       = 4;
+      optional UserMentionData user_mention_data        = 5;
+      optional HashtagData hashtag_data                 = 6;
+    }
+
+    message Attachment {
+      message EmbedClientItem {
+        message DeepLinkData {
+          message PackagingServiceClient {
+            enum type_enum {
+              TYPE_UNKNOWN = 0;
+            }
+
+            optional type_enum type                           = 1;
+            optional string android_package_name              = 2;
+            optional string ios_bundle_id                     = 3;
+            optional string ios_app_store_id                  = 4;
+          }
+
+          optional int64 app_id                             = 1;
+          optional string deep_link_id                      = 2;
+          repeated PackagingServiceClient client            = 3;
+          optional string url                               = 4;
+        }
+
+        message TransientData {
+        }
+
+        message Provenance {
+          optional uint64 retrieved_timestamp_msec          = 1;
+          optional string input_url                         = 2;
+          optional string retrieved_url                     = 3;
+          optional string canonical_url                     = 4;
+          optional string itemtype                          = 5;
+        }
+
+        enum type_enum {
+          TYPE_UNKNOWN = 0;
+        }
+
+        optional type_enum type                           = 1;
+        optional string id                                = 2;
+        optional string canonical_id                      = 3;
+        optional DeepLinkData deep_link_data              = 4;
+        optional TransientData transient_data             = 5;
+        optional string signature                         = 6;
+        optional Provenance provenance                    = 7;
+        optional string render_id                         = 8;
+      }
+
+      optional EmbedClientItem embed_item               = 1;
+      optional any unknown_any_field                    = 2;
+      optional string id                                = 3;
+    }
+
+    repeated Segment segment                          = 1;
+    repeated Attachment attachment                    = 2;
+  }
+
+  message ClientExistingMedia {
+    message Photo {
+      optional string photo_id                          = 1;
+      optional bool photo                               = 2;
+      optional string owner_gaia_id                     = 3;
+      optional bool photo                               = 4;
+    }
+
+    message AudioOptions {
+      optional int64 duration_ms                        = 1;
+    }
+
+    message ClientClientGeneratedAttachmentMetadata {
+      optional string id                                = 1;
+    }
+
+    optional Photo photo                              = 1;
+    optional AudioOptions audio_options               = 2;
+    optional ClientClientGeneratedAttachmentMetadata client_metadata = 3;
+  }
+
+  message ClientEventRequestHeader {
+    message ClientConversationId {
+      optional string id                                = 1;
+    }
+
+    message ClientDeliveryMedium {
+      message PhoneNumber {
+        message I18nData {
+          enum validation_result_enum {
+            VALIDATION_RESULT_UNKNOWN = 0;
+          }
+
+          optional string national_number                   = 1;
+          optional string international_number              = 2;
+          optional int32 country_code                       = 3;
+          optional string region_code                       = 4;
+          optional bool i18n_data                           = 5;
+          optional validation_result_enum validation_result = 6;
+        }
+
+        optional string e164                              = 1;
+        optional I18nData i18n_data                       = 2;
+      }
+
+      enum medium_type_enum {
+        MEDIUM_TYPE_UNKNOWN = 0;
+      }
+
+      optional medium_type_enum medium_type             = 1;
+      optional PhoneNumber self_phone                   = 2;
+    }
+
+    message ClientConversationConsistencyToken {
+      optional any unknown_any_field                    = 1;
+      optional uint32 type_hash                         = 2;
+    }
+
+    enum expected_otr_enum {
+      EXPECTED_OTR_UNKNOWN = 0;
+    }
+
+    enum event_type_enum {
+      EVENT_TYPE_UNKNOWN = 0;
+    }
+
+    optional ClientConversationId conversation_id     = 1;
+    optional uint64 client_generated_id               = 2;
+    optional expected_otr_enum expected_otr           = 3;
+    optional ClientDeliveryMedium delivery_medium     = 4;
+    optional event_type_enum event_type               = 5;
+    optional ClientConversationConsistencyToken conversation_consistency_token = 6;
+  }
+
+  message ClientInviteeId {
+    message ClientLookupMethod {
+      message ClientPhoneLookup {
+        message PhoneNumber {
+          message I18nData {
+            enum validation_result_enum {
+              VALIDATION_RESULT_UNKNOWN = 0;
+            }
+
+            optional string national_number                   = 1;
+            optional string international_number              = 2;
+            optional int32 country_code                       = 3;
+            optional string region_code                       = 4;
+            optional bool i18n_data                           = 5;
+            optional validation_result_enum validation_result = 6;
+          }
+
+          optional string e164                              = 1;
+          optional I18nData i18n_data                       = 2;
+        }
+
+        optional PhoneNumber phone_number                 = 1;
+      }
+
+      message ClientEmailLookup {
+        optional string email                             = 1;
+      }
+
+      message ClientNameLookup {
+        optional string partial_name                      = 1;
+      }
+
+      optional ClientPhoneLookup phone_lookup           = 1;
+      optional ClientEmailLookup email_lookup           = 2;
+      optional ClientNameLookup name_lookup             = 3;
+    }
+
+    message PhoneNumber {
+      message I18nData {
+        enum validation_result_enum {
+          VALIDATION_RESULT_UNKNOWN = 0;
+        }
+
+        optional string national_number                   = 1;
+        optional string international_number              = 2;
+        optional int32 country_code                       = 3;
+        optional string region_code                       = 4;
+        optional bool i18n_data                           = 5;
+        optional validation_result_enum validation_result = 6;
+      }
+
+      optional string e164                              = 1;
+      optional I18nData i18n_data                       = 2;
+    }
+
+    optional string gaia_id                           = 1;
+    optional string circle_id                         = 2;
+    optional string chat_id                           = 3;
+    optional string fallback_name                     = 4;
+    optional bytes deprecated_5                       = 5;
+    repeated ClientLookupMethod lookup_method         = 6;
+    optional PhoneNumber phone                        = 7;
+  }
+
+  message ClientLocationSpec {
+    message PlaceV2 {
+      message Thumbnail {
+        message SafeMobileUrl {
+          enum url_format_enum {
+            URL_FORMAT_UNKNOWN = 0;
+          }
+
+          optional url_format_enum url_format               = 1;
+          optional string url                               = 2;
+        }
+
+        optional string image_url                         = 1;
+        optional int32 box_width_px                       = 2;
+        optional int32 box_height_px                      = 3;
+        optional bool proxied_image                       = 4;
+        optional bool proxied_image                       = 5;
+        optional bool proxied_image                       = 6;
+        optional string uncropped_image_url               = 7;
+        optional int32 image_height_px                    = 8;
+        optional SafeMobileUrl safe_mobile_url            = 9;
+      }
+
+      message EmbedClientItem {
+        message DeepLinkData {
+          message PackagingServiceClient {
+            enum type_enum {
+              TYPE_UNKNOWN = 0;
+            }
+
+            optional type_enum type                           = 1;
+            optional string android_package_name              = 2;
+            optional string ios_bundle_id                     = 3;
+            optional string ios_app_store_id                  = 4;
+          }
+
+          optional int64 app_id                             = 1;
+          optional string deep_link_id                      = 2;
+          repeated PackagingServiceClient client            = 3;
+          optional string url                               = 4;
+        }
+
+        message TransientData {
+        }
+
+        message Provenance {
+          optional uint64 retrieved_timestamp_msec          = 1;
+          optional string input_url                         = 2;
+          optional string retrieved_url                     = 3;
+          optional string canonical_url                     = 4;
+          optional string itemtype                          = 5;
+        }
+
+        enum type_enum {
+          TYPE_UNKNOWN = 0;
+        }
+
+        optional type_enum type                           = 1;
+        optional string id                                = 2;
+        optional string canonical_id                      = 3;
+        optional DeepLinkData deep_link_data              = 4;
+        optional TransientData transient_data             = 5;
+        optional string signature                         = 6;
+        optional Provenance provenance                    = 7;
+        optional string render_id                         = 8;
+      }
+
+      optional string url                               = 1;
+      optional string image_url                         = 2;
+      optional string name                              = 3;
+      optional string description                       = 4;
+      optional string description_truncated             = 5;
+      optional Thumbnail proxied_image                  = 6;
+      optional string proxied_favicon_url               = 7;
+      repeated EmbedClientItem author                   = 8;
+      optional EmbedClientItem about                    = 9;
+      optional any unknown_any_field                    = 10;
+      repeated EmbedClientItem related_image            = 11;
+      optional string source_name                       = 12;
+    }
+
+    message ClientClientGeneratedAttachmentMetadata {
+      optional string id                                = 1;
+    }
+
+    optional PlaceV2 place                            = 1;
+    optional bytes deprecated_2                       = 2;
+    optional ClientClientGeneratedAttachmentMetadata client_metadata = 3;
+  }
+
+  message ClientExternalImageSpec {
+    message ClientClientGeneratedAttachmentMetadata {
+      optional string id                                = 1;
+    }
+
+    optional string image_url                         = 1;
+    optional int32 width                              = 2;
+    optional int32 height                             = 3;
+    optional string containing_webpage_url            = 4;
+    optional string containing_webpage_title          = 5;
+    optional string description                       = 6;
+    optional ClientClientGeneratedAttachmentMetadata client_metadata = 7;
+  }
+
+  message ClientChatMessageSpec {
+    message Segment {
+      message Formatting {
+        enum style_enum {
+          STYLE_UNKNOWN = 0;
+        }
+
+        optional bool formatting                          = 1;
+        optional bool formatting                          = 2;
+        optional bool formatting                          = 3;
+        optional bool formatting                          = 4;
+        optional style_enum style                         = 5;
+        optional bool formatting                          = 6;
+      }
+
+      message LinkData {
+        message Attachment {
+          message EmbedClientItem {
+            message DeepLinkData {
+              message PackagingServiceClient {
+                enum type_enum {
+                  TYPE_UNKNOWN = 0;
+                }
+
+                optional type_enum type                           = 1;
+                optional string android_package_name              = 2;
+                optional string ios_bundle_id                     = 3;
+                optional string ios_app_store_id                  = 4;
+              }
+
+              optional int64 app_id                             = 1;
+              optional string deep_link_id                      = 2;
+              repeated PackagingServiceClient client            = 3;
+              optional string url                               = 4;
+            }
+
+            message TransientData {
+            }
+
+            message Provenance {
+              optional uint64 retrieved_timestamp_msec          = 1;
+              optional string input_url                         = 2;
+              optional string retrieved_url                     = 3;
+              optional string canonical_url                     = 4;
+              optional string itemtype                          = 5;
+            }
+
+            enum type_enum {
+              TYPE_UNKNOWN = 0;
+            }
+
+            optional type_enum type                           = 1;
+            optional string id                                = 2;
+            optional string canonical_id                      = 3;
+            optional DeepLinkData deep_link_data              = 4;
+            optional TransientData transient_data             = 5;
+            optional string signature                         = 6;
+            optional Provenance provenance                    = 7;
+            optional string render_id                         = 8;
+          }
+
+          optional EmbedClientItem embed_item               = 1;
+          optional any unknown_any_field                    = 2;
+          optional string id                                = 3;
+        }
+
+        enum attachment_render_hint_enum {
+          ATTACHMENT_RENDER_HINT_UNKNOWN = 0;
+        }
+
+        enum link_type_enum {
+          LINK_TYPE_UNKNOWN = 0;
+        }
+
+        optional string link_target                       = 1;
+        optional string display_url                       = 2;
+        optional Attachment attachment                    = 3;
+        optional string title                             = 4;
+        optional attachment_render_hint_enum attachment_render_hint = 5;
+        optional link_type_enum link_type                 = 6;
+      }
+
+      message UserMentionData {
+        message PrincipalProto {
+          enum scope_enum {
+            SCOPE_UNKNOWN = 0;
+          }
+
+          optional scope_enum scope                         = 1;
+        }
+
+        optional int64 user_gaia_id                       = 1;
+        optional string user_id                           = 2;
+        optional string email                             = 3;
+        optional PrincipalProto user                      = 4;
+      }
+
+      message HashtagData {
+        optional string search_text                       = 1;
+        optional string search_text                       = 2;
+        optional string search_text                       = 3;
+        optional string search_text                       = 4;
+        optional string search_text                       = 5;
+      }
+
+      enum type_enum {
+        TYPE_UNKNOWN = 0;
+      }
+
+      optional type_enum type                           = 1;
+      optional string text                              = 2;
+      optional Formatting formatting                    = 3;
+      optional LinkData link_data                       = 4;
+      optional UserMentionData user_mention_data        = 5;
+      optional HashtagData hashtag_data                 = 6;
+    }
+
+    message ClientMediaServerItem {
+      message ExistingMedia {
+        optional string owner_gaia_id                     = 1;
+        optional string media_id                          = 2;
+        optional bool existing_media                      = 3;
+        optional bool existing_media                      = 4;
+      }
+
+      message UploadedMedia {
+        optional bool uploaded_media                      = 1;
+      }
+
+      message AudioOptions {
+        optional int64 duration_ms                        = 1;
+      }
+
+      message ClientClientGeneratedAttachmentMetadata {
+        optional string id                                = 1;
+      }
+
+      optional ExistingMedia existing_media             = 1;
+      optional UploadedMedia uploaded_media             = 2;
+      optional AudioOptions audio_options               = 3;
+      optional ClientClientGeneratedAttachmentMetadata client_metadata = 4;
+    }
+
+    message ClientLocationSpec {
+      message PlaceV2 {
+        message Thumbnail {
+          message SafeMobileUrl {
+            enum url_format_enum {
+              URL_FORMAT_UNKNOWN = 0;
+            }
+
+            optional url_format_enum url_format               = 1;
+            optional string url                               = 2;
+          }
+
+          optional string image_url                         = 1;
+          optional int32 box_width_px                       = 2;
+          optional int32 box_height_px                      = 3;
+          optional bool proxied_image                       = 4;
+          optional bool proxied_image                       = 5;
+          optional bool proxied_image                       = 6;
+          optional string uncropped_image_url               = 7;
+          optional int32 image_height_px                    = 8;
+          optional SafeMobileUrl safe_mobile_url            = 9;
+        }
+
+        message EmbedClientItem {
+          message DeepLinkData {
+            message PackagingServiceClient {
+              enum type_enum {
+                TYPE_UNKNOWN = 0;
+              }
+
+              optional type_enum type                           = 1;
+              optional string android_package_name              = 2;
+              optional string ios_bundle_id                     = 3;
+              optional string ios_app_store_id                  = 4;
+            }
+
+            optional int64 app_id                             = 1;
+            optional string deep_link_id                      = 2;
+            repeated PackagingServiceClient client            = 3;
+            optional string url                               = 4;
+          }
+
+          message TransientData {
+          }
+
+          message Provenance {
+            optional uint64 retrieved_timestamp_msec          = 1;
+            optional string input_url                         = 2;
+            optional string retrieved_url                     = 3;
+            optional string canonical_url                     = 4;
+            optional string itemtype                          = 5;
+          }
+
+          enum type_enum {
+            TYPE_UNKNOWN = 0;
+          }
+
+          optional type_enum type                           = 1;
+          optional string id                                = 2;
+          optional string canonical_id                      = 3;
+          optional DeepLinkData deep_link_data              = 4;
+          optional TransientData transient_data             = 5;
+          optional string signature                         = 6;
+          optional Provenance provenance                    = 7;
+          optional string render_id                         = 8;
+        }
+
+        optional string url                               = 1;
+        optional string image_url                         = 2;
+        optional string name                              = 3;
+        optional string description                       = 4;
+        optional string description_truncated             = 5;
+        optional Thumbnail proxied_image                  = 6;
+        optional string proxied_favicon_url               = 7;
+        repeated EmbedClientItem author                   = 8;
+        optional EmbedClientItem about                    = 9;
+        optional any unknown_any_field                    = 10;
+        repeated EmbedClientItem related_image            = 11;
+        optional string source_name                       = 12;
+      }
+
+      message ClientClientGeneratedAttachmentMetadata {
+        optional string id                                = 1;
+      }
+
+      optional PlaceV2 place                            = 1;
+      optional bytes deprecated_2                       = 2;
+      optional ClientClientGeneratedAttachmentMetadata client_metadata = 3;
+    }
+
+    message ClientExternalImageSpec {
+      message ClientClientGeneratedAttachmentMetadata {
+        optional string id                                = 1;
+      }
+
+      optional string image_url                         = 1;
+      optional int32 width                              = 2;
+      optional int32 height                             = 3;
+      optional string containing_webpage_url            = 4;
+      optional string containing_webpage_title          = 5;
+      optional string description                       = 6;
+      optional ClientClientGeneratedAttachmentMetadata client_metadata = 7;
+    }
+
+    message ClientStickerSpec {
+      message ClientStaticMediaNodeId {
+        optional string id                                = 1;
+      }
+
+      message ClientClientGeneratedAttachmentMetadata {
+        optional string id                                = 1;
+      }
+
+      optional ClientStaticMediaNodeId sticker_id       = 1;
+      optional string local_static_media_tree_version   = 2;
+      optional ClientClientGeneratedAttachmentMetadata client_metadata = 3;
+    }
+
+    message ClientQuoteSpec {
+      message ClientClientGeneratedAttachmentMetadata {
+        optional string id                                = 1;
+      }
+
+      optional string original_message_id               = 1;
+      optional ClientClientGeneratedAttachmentMetadata client_metadata = 2;
+    }
+
+    repeated Segment segment                          = 1;
+    optional ClientMediaServerItem media_server_item  = 2;
+    optional ClientLocationSpec attach_location       = 3;
+    optional ClientExternalImageSpec external_image_spec = 4;
+    optional ClientStickerSpec sticker_spec           = 5;
+    optional ClientQuoteSpec quote_spec               = 6;
+  }
+
+  message ClientStickerSpec {
+    message ClientStaticMediaNodeId {
+      optional string id                                = 1;
+    }
+
+    message ClientClientGeneratedAttachmentMetadata {
+      optional string id                                = 1;
+    }
+
+    optional ClientStaticMediaNodeId sticker_id       = 1;
+    optional string local_static_media_tree_version   = 2;
+    optional ClientClientGeneratedAttachmentMetadata client_metadata = 3;
+  }
+
+  message ClientQuoteSpec {
+    message ClientClientGeneratedAttachmentMetadata {
+      optional string id                                = 1;
+    }
+
+    optional string original_message_id               = 1;
+    optional ClientClientGeneratedAttachmentMetadata client_metadata = 2;
+  }
+
+  optional ClientRequestHeader request_header       = 1;
+  optional bytes deprecated_2                       = 2;
+  optional uint64 deprecated_3                      = 3;
+  optional any unknown_any_field                    = 4;
+  repeated ClientEventAnnotation annotation         = 5;
+  optional ClientMessageContent message_content     = 6;
+  optional ClientExistingMedia existing_media       = 7;
+  optional ClientEventRequestHeader event_request_header = 8;
+  optional ClientInviteeId other_invitee_id         = 9;
+  optional ClientLocationSpec attach_location       = 10;
+  optional ClientExternalImageSpec external_image_spec = 11;
+  repeated ClientChatMessageSpec chat_message_spec  = 12;
+  optional ClientStickerSpec sticker_spec           = 13;
+  optional ClientQuoteSpec quote_spec               = 14;
+}
+
+
+// [{"type":"ClientRequestHeader","subtypes":[{"subtypes":[{"type":"enum","field":"client_id","enum_type":"client_id_enum","is_enum":1,"is_complex_type":0,"full_field":"request.request_header.client_version.client_id","full_type":"TYPE_ENUM","is_simple_type":1},{"is_complex_type":0,"is_enum":1,"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.request_header.client_version.build_type","type":"enum","enum_type":"build_type_enum","field":"build_type"},{"type":"string","field":"major_version","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.request_header.client_version.major_version"},{"type":"int64","field":"version","is_enum":0,"is_complex_type":0,"full_field":"request.request_header.client_version.version","full_type":"TYPE_INT64","is_simple_type":1},{"is_enum":0,"is_complex_type":0,"full_field":"request.request_header.client_version.device_os_version","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"device_os_version"},{"field":"device_hardware","type":"string","full_field":"request.request_header.client_version.device_hardware","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"type":"int32","field":"android_sdk_api_level","is_complex_type":0,"is_enum":0,"full_type":"TYPE_INT32","is_simple_type":1,"full_field":"request.request_header.client_version.android_sdk_api_level"}],"type":"ClientClientVersion","field":"client_version","is_complex_type":1,"package":"chat.frontend","is_enum":0,"full_type":"type.googleapis.com/chat.frontend.ClientClientVersion","is_simple_type":0,"full_field":"request.request_header.client_version"},{"full_field":"request.request_header.client_identifier","full_type":"type.googleapis.com/chat.frontend.ClientClientIdentifier","is_simple_type":0,"is_enum":0,"package":"chat.frontend","is_complex_type":1,"field":"client_identifier","subtypes":[{"type":"string","field":"resource","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.request_header.client_identifier.resource"},{"field":"client_id","type":"string","full_field":"request.request_header.client_identifier.client_id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.request_header.client_identifier.self_fanout_id","is_complex_type":0,"is_enum":0,"field":"self_fanout_id","type":"string"},{"full_field":"request.request_header.client_identifier.participant_log_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"participant_log_id","type":"string"}],"type":"ClientClientIdentifier"},{"is_complex_type":1,"package":"chat.frontend","is_enum":0,"full_type":"type.googleapis.com/chat.frontend.ClientClientInstrumentationInfo","is_simple_type":0,"full_field":"request.request_header.client_instrumentation_info","type":"ClientClientInstrumentationInfo","subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.request_header.client_instrumentation_info.chat_message_sequence_number","is_simple_type":1,"full_type":"TYPE_INT64","type":"int64","field":"chat_message_sequence_number"},{"field":"client_request_id","type":"string","full_field":"request.request_header.client_instrumentation_info.client_request_id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0}],"field":"client_instrumentation_info"},{"type":"string","field":"language_code","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.request_header.language_code"},{"full_field":"request.request_header","is_simple_type":1,"full_type":"BOOL","is_enum":0,"is_complex_type":0,"field":"request_header","type":"bool"},{"field":"retry_attempt","type":"uint32","is_simple_type":1,"full_type":"TYPE_UINT32","full_field":"request.request_header.retry_attempt","is_complex_type":0,"is_enum":0},{"is_enum":0,"package":"rtc.client","is_complex_type":1,"full_field":"request.request_header.rtc_client","is_simple_type":0,"full_type":"type.googleapis.com/rtc.client.RtcClient","type":"RtcClient","subtypes":[{"is_complex_type":0,"is_enum":1,"full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.request_header.rtc_client.device","type":"enum","enum_type":"device_enum","field":"device"},{"type":"enum","field":"application","enum_type":"application_enum","is_enum":1,"is_complex_type":0,"full_field":"request.request_header.rtc_client.application","full_type":"TYPE_ENUM","is_simple_type":1},{"is_complex_type":0,"is_enum":1,"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.request_header.rtc_client.platform","type":"enum","enum_type":"platform_enum","field":"platform"}],"field":"rtc_client"},{"full_field":"request.request_header.client_generated_request_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"client_generated_request_id","type":"string"},{"field":"local_state_hash","type":"ClientCacheHash","subtypes":[{"full_field":"request.request_header.local_state_hash.update_id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"update_id","type":"string"},{"field":"hash_diff","type":"uint64","full_type":"TYPE_UINT64","is_simple_type":1,"full_field":"request.request_header.local_state_hash.hash_diff","is_complex_type":0,"is_enum":0},{"is_enum":0,"is_complex_type":0,"full_field":"request.request_header.local_state_hash.hash_rollup","full_type":"TYPE_UINT64","is_simple_type":1,"type":"uint64","field":"hash_rollup"},{"full_field":"request.request_header.local_state_hash.version","is_simple_type":1,"full_type":"TYPE_UINT64","is_enum":0,"is_complex_type":0,"field":"version","type":"uint64"}],"full_field":"request.request_header.local_state_hash","full_type":"type.googleapis.com/chat.frontend.ClientCacheHash","is_simple_type":0,"is_enum":0,"package":"chat.frontend","is_complex_type":1}],"field":"request_header","package":"chat.frontend","is_enum":0,"is_complex_type":1,"full_field":"request.request_header","full_type":"type.googleapis.com/chat.frontend.ClientRequestHeader","is_simple_type":0},{"is_enum":0,"is_complex_type":0,"full_field":"request.deprecated_2","is_simple_type":1,"full_type":"TYPE_BYTES","type":"bytes","field":"deprecated_2"},{"type":"uint64","field":"deprecated_3","is_enum":0,"is_complex_type":0,"full_field":"request.deprecated_3","full_type":"TYPE_UINT64","is_simple_type":1},{"is_enum":0,"is_complex_type":0,"type":"any","field":"unknown_any_field","is_simple_type":0},{"package":"chat.frontend","is_enum":0,"is_complex_type":1,"full_field":"request.annotation","full_type":"type.googleapis.com/chat.frontend.ClientEventAnnotation","is_simple_type":0,"repeated":1,"subtypes":[{"type":"int32","field":"type","is_enum":0,"is_complex_type":0,"full_field":"request.annotation[0].type","full_type":"TYPE_INT32","is_simple_type":1},{"full_field":"request.annotation[0].value","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"value","type":"string"}],"type":"ClientEventAnnotation","field":"annotation"},{"package":"chat.frontend","is_enum":0,"is_complex_type":1,"full_field":"request.message_content","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientMessageContent","type":"ClientMessageContent","subtypes":[{"field":"segment","subtypes":[{"is_enum":1,"is_complex_type":0,"full_field":"request.message_content.segment[0].type","is_simple_type":1,"full_type":"TYPE_ENUM","type":"enum","field":"type","enum_type":"type_enum"},{"field":"text","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].text","is_complex_type":0,"is_enum":0},{"full_field":"request.message_content.segment[0].formatting","is_simple_type":0,"full_type":"type.googleapis.com/social.common.Formatting","package":"social.common","is_enum":0,"is_complex_type":1,"field":"formatting","subtypes":[{"field":"formatting","type":"bool","full_type":"BOOL","is_simple_type":1,"full_field":"request.message_content.segment[0].formatting","is_complex_type":0,"is_enum":0},{"is_simple_type":1,"full_type":"BOOL","full_field":"request.message_content.segment[0].formatting","is_complex_type":0,"is_enum":0,"field":"formatting","type":"bool"},{"field":"formatting","type":"bool","is_simple_type":1,"full_type":"BOOL","full_field":"request.message_content.segment[0].formatting","is_complex_type":0,"is_enum":0},{"full_type":"BOOL","is_simple_type":1,"full_field":"request.message_content.segment[0].formatting","is_complex_type":0,"is_enum":0,"field":"formatting","type":"bool"},{"is_complex_type":0,"is_enum":1,"full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.message_content.segment[0].formatting.style","type":"enum","enum_type":"style_enum","field":"style"},{"field":"formatting","type":"bool","is_simple_type":1,"full_type":"BOOL","full_field":"request.message_content.segment[0].formatting","is_complex_type":0,"is_enum":0}],"type":"Formatting"},{"type":"LinkData","subtypes":[{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.segment[0].link_data.link_target","is_complex_type":0,"is_enum":0,"field":"link_target","type":"string"},{"field":"display_url","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].link_data.display_url","is_complex_type":0,"is_enum":0},{"package":"social.common.attachment","is_enum":0,"is_complex_type":1,"full_field":"request.message_content.segment[0].link_data.attachment","is_simple_type":0,"full_type":"type.googleapis.com/social.common.attachment.Attachment","subtypes":[{"full_field":"request.message_content.segment[0].link_data.attachment.embed_item","is_simple_type":0,"full_type":"type.googleapis.com/embeds.EmbedClientItem","is_enum":0,"package":"embeds","is_complex_type":1,"field":"embed_item","subtypes":[{"is_enum":1,"is_complex_type":0,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.type","is_simple_type":1,"full_type":"TYPE_ENUM","type":"enum","field":"type","enum_type":"type_enum"},{"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"id","type":"string"},{"field":"canonical_id","type":"string","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.canonical_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"type":"DeepLinkData","subtypes":[{"type":"int64","field":"app_id","is_enum":0,"is_complex_type":0,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data.app_id","full_type":"TYPE_INT64","is_simple_type":1},{"field":"deep_link_id","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data.deep_link_id","is_complex_type":0,"is_enum":0},{"field":"client","type":"PackagingServiceClient","subtypes":[{"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data.client[0].type","is_complex_type":0,"is_enum":1,"enum_type":"type_enum","field":"type","type":"enum"},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data.client[0].android_package_name","is_complex_type":0,"is_enum":0,"field":"android_package_name","type":"string"},{"field":"ios_bundle_id","type":"string","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data.client[0].ios_bundle_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"type":"string","field":"ios_app_store_id","is_enum":0,"is_complex_type":0,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data.client[0].ios_app_store_id","full_type":"TYPE_STRING","is_simple_type":1}],"repeated":1,"full_type":"type.googleapis.com/embeds.PackagingServiceClient","is_simple_type":0,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data.client","is_complex_type":1,"is_enum":0,"package":"embeds"},{"field":"url","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data.url","is_complex_type":0,"is_enum":0}],"field":"deep_link_data","is_complex_type":1,"is_enum":0,"package":"embeds","is_simple_type":0,"full_type":"type.googleapis.com/embeds.DeepLinkData","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.deep_link_data"},{"type":"TransientData","subtypes":[],"field":"transient_data","is_enum":0,"package":"embeds","is_complex_type":1,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.transient_data","full_type":"type.googleapis.com/embeds.TransientData","is_simple_type":0},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.signature","is_complex_type":0,"is_enum":0,"field":"signature","type":"string"},{"type":"Provenance","subtypes":[{"is_simple_type":1,"full_type":"TYPE_UINT64","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.provenance.retrieved_timestamp_msec","is_complex_type":0,"is_enum":0,"field":"retrieved_timestamp_msec","type":"uint64"},{"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.provenance.input_url","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"input_url","type":"string"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.provenance.retrieved_url","type":"string","field":"retrieved_url"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.provenance.canonical_url","type":"string","field":"canonical_url"},{"field":"itemtype","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.provenance.itemtype","is_complex_type":0,"is_enum":0}],"field":"provenance","is_complex_type":1,"package":"embeds","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/embeds.Provenance","full_field":"request.message_content.segment[0].link_data.attachment.embed_item.provenance"},{"is_enum":0,"is_complex_type":0,"full_field":"request.message_content.segment[0].link_data.attachment.embed_item.render_id","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"render_id"}],"type":"EmbedClientItem"},{"field":"unknown_any_field","is_simple_type":0,"is_enum":0,"type":"any","is_complex_type":0},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.segment[0].link_data.attachment.id","type":"string","field":"id"}],"type":"Attachment","field":"attachment"},{"type":"string","field":"title","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].link_data.title"},{"is_complex_type":0,"is_enum":1,"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.message_content.segment[0].link_data.attachment_render_hint","type":"enum","enum_type":"attachment_render_hint_enum","field":"attachment_render_hint"},{"type":"enum","field":"link_type","enum_type":"link_type_enum","is_enum":1,"is_complex_type":0,"full_field":"request.message_content.segment[0].link_data.link_type","is_simple_type":1,"full_type":"TYPE_ENUM"}],"field":"link_data","is_complex_type":1,"package":"social.common","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/social.common.LinkData","full_field":"request.message_content.segment[0].link_data"},{"subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.message_content.segment[0].user_mention_data.user_gaia_id","is_simple_type":1,"full_type":"TYPE_INT64","type":"int64","field":"user_gaia_id"},{"field":"user_id","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].user_mention_data.user_id","is_complex_type":0,"is_enum":0},{"type":"string","field":"email","is_enum":0,"is_complex_type":0,"full_field":"request.message_content.segment[0].user_mention_data.email","is_simple_type":1,"full_type":"TYPE_STRING"},{"subtypes":[{"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.message_content.segment[0].user_mention_data.user.scope","is_complex_type":0,"is_enum":1,"enum_type":"scope_enum","field":"scope","type":"enum"}],"type":"PrincipalProto","field":"user","is_complex_type":1,"is_enum":0,"package":"security.credentials","is_simple_type":0,"full_type":"type.googleapis.com/security.credentials.PrincipalProto","full_field":"request.message_content.segment[0].user_mention_data.user"}],"type":"UserMentionData","field":"user_mention_data","package":"social.common","is_enum":0,"is_complex_type":1,"full_field":"request.message_content.segment[0].user_mention_data","is_simple_type":0,"full_type":"type.googleapis.com/social.common.UserMentionData"},{"is_complex_type":1,"package":"social.common","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/social.common.HashtagData","full_field":"request.message_content.segment[0].hashtag_data","subtypes":[{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].hashtag_data.search_text","type":"string","field":"search_text"},{"type":"string","field":"search_text","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.segment[0].hashtag_data.search_text"},{"type":"string","field":"search_text","is_enum":0,"is_complex_type":0,"full_field":"request.message_content.segment[0].hashtag_data.search_text","is_simple_type":1,"full_type":"TYPE_STRING"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.segment[0].hashtag_data.search_text","is_complex_type":0,"is_enum":0,"field":"search_text","type":"string"},{"type":"string","field":"search_text","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.segment[0].hashtag_data.search_text"}],"type":"HashtagData","field":"hashtag_data"}],"type":"Segment","repeated":1,"is_simple_type":0,"full_type":"type.googleapis.com/social.common.Segment","full_field":"request.message_content.segment","is_complex_type":1,"is_enum":0,"package":"social.common"},{"field":"attachment","type":"Attachment","subtypes":[{"type":"EmbedClientItem","subtypes":[{"type":"enum","field":"type","enum_type":"type_enum","is_enum":1,"is_complex_type":0,"full_field":"request.message_content.attachment[0].embed_item.type","is_simple_type":1,"full_type":"TYPE_ENUM"},{"full_field":"request.message_content.attachment[0].embed_item.id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"id","type":"string"},{"field":"canonical_id","type":"string","full_field":"request.message_content.attachment[0].embed_item.canonical_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"field":"deep_link_data","type":"DeepLinkData","subtypes":[{"field":"app_id","type":"int64","full_field":"request.message_content.attachment[0].embed_item.deep_link_data.app_id","is_simple_type":1,"full_type":"TYPE_INT64","is_enum":0,"is_complex_type":0},{"field":"deep_link_id","type":"string","full_field":"request.message_content.attachment[0].embed_item.deep_link_data.deep_link_id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"is_enum":0,"package":"embeds","is_complex_type":1,"full_field":"request.message_content.attachment[0].embed_item.deep_link_data.client","full_type":"type.googleapis.com/embeds.PackagingServiceClient","is_simple_type":0,"repeated":1,"subtypes":[{"is_complex_type":0,"is_enum":1,"full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.message_content.attachment[0].embed_item.deep_link_data.client[0].type","type":"enum","enum_type":"type_enum","field":"type"},{"full_field":"request.message_content.attachment[0].embed_item.deep_link_data.client[0].android_package_name","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"android_package_name","type":"string"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.attachment[0].embed_item.deep_link_data.client[0].ios_bundle_id","type":"string","field":"ios_bundle_id"},{"full_field":"request.message_content.attachment[0].embed_item.deep_link_data.client[0].ios_app_store_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"ios_app_store_id","type":"string"}],"type":"PackagingServiceClient","field":"client"},{"field":"url","type":"string","full_field":"request.message_content.attachment[0].embed_item.deep_link_data.url","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0}],"is_simple_type":0,"full_type":"type.googleapis.com/embeds.DeepLinkData","full_field":"request.message_content.attachment[0].embed_item.deep_link_data","is_complex_type":1,"package":"embeds","is_enum":0},{"package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.message_content.attachment[0].embed_item.transient_data","is_simple_type":0,"full_type":"type.googleapis.com/embeds.TransientData","subtypes":[],"type":"TransientData","field":"transient_data"},{"field":"signature","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.attachment[0].embed_item.signature","is_complex_type":0,"is_enum":0},{"type":"Provenance","subtypes":[{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_UINT64","is_simple_type":1,"full_field":"request.message_content.attachment[0].embed_item.provenance.retrieved_timestamp_msec","type":"uint64","field":"retrieved_timestamp_msec"},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.message_content.attachment[0].embed_item.provenance.input_url","is_complex_type":0,"is_enum":0,"field":"input_url","type":"string"},{"full_field":"request.message_content.attachment[0].embed_item.provenance.retrieved_url","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"retrieved_url","type":"string"},{"field":"canonical_url","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.attachment[0].embed_item.provenance.canonical_url","is_complex_type":0,"is_enum":0},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.message_content.attachment[0].embed_item.provenance.itemtype","is_complex_type":0,"is_enum":0,"field":"itemtype","type":"string"}],"field":"provenance","is_complex_type":1,"package":"embeds","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/embeds.Provenance","full_field":"request.message_content.attachment[0].embed_item.provenance"},{"field":"render_id","type":"string","full_field":"request.message_content.attachment[0].embed_item.render_id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0}],"field":"embed_item","package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.message_content.attachment[0].embed_item","is_simple_type":0,"full_type":"type.googleapis.com/embeds.EmbedClientItem"},{"field":"unknown_any_field","is_simple_type":0,"is_enum":0,"type":"any","is_complex_type":0},{"is_enum":0,"is_complex_type":0,"full_field":"request.message_content.attachment[0].id","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"id"}],"repeated":1,"full_type":"type.googleapis.com/social.common.attachment.Attachment","is_simple_type":0,"full_field":"request.message_content.attachment","is_complex_type":1,"is_enum":0,"package":"social.common.attachment"}],"field":"message_content"},{"type":"ClientExistingMedia","subtypes":[{"type":"Photo","subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.existing_media.photo.photo_id","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"photo_id"},{"is_enum":0,"is_complex_type":0,"full_field":"request.existing_media.photo","is_simple_type":1,"full_type":"BOOL","type":"bool","field":"photo"},{"is_enum":0,"is_complex_type":0,"full_field":"request.existing_media.photo.owner_gaia_id","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"owner_gaia_id"},{"is_enum":0,"is_complex_type":0,"full_field":"request.existing_media.photo","is_simple_type":1,"full_type":"BOOL","type":"bool","field":"photo"}],"field":"photo","package":"chat.frontend.ClientExistingMedia","is_enum":0,"is_complex_type":1,"full_field":"request.existing_media.photo","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientExistingMedia.Photo"},{"package":"chat.frontend.ClientExistingMedia","is_enum":0,"is_complex_type":1,"full_field":"request.existing_media.audio_options","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientExistingMedia.AudioOptions","type":"AudioOptions","subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.existing_media.audio_options.duration_ms","full_type":"TYPE_INT64","is_simple_type":1,"type":"int64","field":"duration_ms"}],"field":"audio_options"},{"full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","is_simple_type":0,"full_field":"request.existing_media.client_metadata","is_complex_type":1,"is_enum":0,"package":"chat.frontend","field":"client_metadata","subtypes":[{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.existing_media.client_metadata.id","type":"string","field":"id"}],"type":"ClientClientGeneratedAttachmentMetadata"}],"field":"existing_media","is_complex_type":1,"is_enum":0,"package":"chat.frontend","full_type":"type.googleapis.com/chat.frontend.ClientExistingMedia","is_simple_type":0,"full_field":"request.existing_media"},{"field":"event_request_header","type":"ClientEventRequestHeader","subtypes":[{"full_field":"request.event_request_header.conversation_id","full_type":"type.googleapis.com/chat.frontend.ClientConversationId","is_simple_type":0,"package":"chat.frontend","is_enum":0,"is_complex_type":1,"field":"conversation_id","type":"ClientConversationId","subtypes":[{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.event_request_header.conversation_id.id","is_complex_type":0,"is_enum":0,"field":"id","type":"string"}]},{"type":"uint64","field":"client_generated_id","is_enum":0,"is_complex_type":0,"full_field":"request.event_request_header.client_generated_id","full_type":"TYPE_UINT64","is_simple_type":1},{"type":"enum","field":"expected_otr","enum_type":"expected_otr_enum","is_enum":1,"is_complex_type":0,"full_field":"request.event_request_header.expected_otr","is_simple_type":1,"full_type":"TYPE_ENUM"},{"full_field":"request.event_request_header.delivery_medium","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientDeliveryMedium","is_enum":0,"package":"chat.frontend","is_complex_type":1,"field":"delivery_medium","type":"ClientDeliveryMedium","subtypes":[{"is_complex_type":0,"is_enum":1,"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.event_request_header.delivery_medium.medium_type","type":"enum","enum_type":"medium_type_enum","field":"medium_type"},{"is_enum":0,"package":"voice","is_complex_type":1,"full_field":"request.event_request_header.delivery_medium.self_phone","is_simple_type":0,"full_type":"type.googleapis.com/voice.PhoneNumber","type":"PhoneNumber","subtypes":[{"type":"string","field":"e164","is_enum":0,"is_complex_type":0,"full_field":"request.event_request_header.delivery_medium.self_phone.e164","is_simple_type":1,"full_type":"TYPE_STRING"},{"subtypes":[{"full_field":"request.event_request_header.delivery_medium.self_phone.i18n_data.national_number","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"national_number","type":"string"},{"field":"international_number","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.event_request_header.delivery_medium.self_phone.i18n_data.international_number","is_complex_type":0,"is_enum":0},{"field":"country_code","type":"int32","full_field":"request.event_request_header.delivery_medium.self_phone.i18n_data.country_code","is_simple_type":1,"full_type":"TYPE_INT32","is_enum":0,"is_complex_type":0},{"field":"region_code","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.event_request_header.delivery_medium.self_phone.i18n_data.region_code","is_complex_type":0,"is_enum":0},{"type":"bool","field":"i18n_data","is_complex_type":0,"is_enum":0,"full_type":"BOOL","is_simple_type":1,"full_field":"request.event_request_header.delivery_medium.self_phone.i18n_data"},{"type":"enum","field":"validation_result","enum_type":"validation_result_enum","is_enum":1,"is_complex_type":0,"full_field":"request.event_request_header.delivery_medium.self_phone.i18n_data.validation_result","is_simple_type":1,"full_type":"TYPE_ENUM"}],"type":"I18nData","field":"i18n_data","is_enum":0,"package":"voice.PhoneNumber","is_complex_type":1,"full_field":"request.event_request_header.delivery_medium.self_phone.i18n_data","is_simple_type":0,"full_type":"type.googleapis.com/voice.PhoneNumber.I18nData"}],"field":"self_phone"}]},{"is_complex_type":0,"is_enum":1,"full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.event_request_header.event_type","type":"enum","enum_type":"event_type_enum","field":"event_type"},{"is_complex_type":1,"package":"chat.frontend","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientConversationConsistencyToken","full_field":"request.event_request_header.conversation_consistency_token","type":"ClientConversationConsistencyToken","subtypes":[{"field":"unknown_any_field","is_simple_type":0,"is_enum":0,"is_complex_type":0,"type":"any"},{"is_enum":0,"is_complex_type":0,"full_field":"request.event_request_header.conversation_consistency_token.type_hash","is_simple_type":1,"full_type":"TYPE_UINT32","type":"uint32","field":"type_hash"}],"field":"conversation_consistency_token"}],"full_field":"request.event_request_header","full_type":"type.googleapis.com/chat.frontend.ClientEventRequestHeader","is_simple_type":0,"package":"chat.frontend","is_enum":0,"is_complex_type":1},{"field":"other_invitee_id","type":"ClientInviteeId","subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.other_invitee_id.gaia_id","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"gaia_id"},{"field":"circle_id","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.other_invitee_id.circle_id","is_complex_type":0,"is_enum":0},{"type":"string","field":"chat_id","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.other_invitee_id.chat_id"},{"is_enum":0,"is_complex_type":0,"full_field":"request.other_invitee_id.fallback_name","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"fallback_name"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_BYTES","is_simple_type":1,"full_field":"request.other_invitee_id.deprecated_5","type":"bytes","field":"deprecated_5"},{"is_complex_type":1,"is_enum":0,"package":"chat.frontend.ClientInviteeId","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientInviteeId.ClientLookupMethod","full_field":"request.other_invitee_id.lookup_method","subtypes":[{"package":"chat.frontend.ClientInviteeId.ClientLookupMethod","is_enum":0,"is_complex_type":1,"full_field":"request.other_invitee_id.lookup_method[0].phone_lookup","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientInviteeId.ClientLookupMethod.ClientPhoneLookup","type":"ClientPhoneLookup","subtypes":[{"is_enum":0,"package":"voice","is_complex_type":1,"full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number","is_simple_type":0,"full_type":"type.googleapis.com/voice.PhoneNumber","subtypes":[{"type":"string","field":"e164","is_enum":0,"is_complex_type":0,"full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number.e164","full_type":"TYPE_STRING","is_simple_type":1},{"is_complex_type":1,"package":"voice.PhoneNumber","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/voice.PhoneNumber.I18nData","full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number.i18n_data","subtypes":[{"field":"national_number","type":"string","full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number.i18n_data.national_number","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number.i18n_data.international_number","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"international_number","type":"string"},{"field":"country_code","type":"int32","full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number.i18n_data.country_code","full_type":"TYPE_INT32","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number.i18n_data.region_code","type":"string","field":"region_code"},{"field":"i18n_data","type":"bool","full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number.i18n_data","is_simple_type":1,"full_type":"BOOL","is_enum":0,"is_complex_type":0},{"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.other_invitee_id.lookup_method[0].phone_lookup.phone_number.i18n_data.validation_result","is_complex_type":0,"is_enum":1,"enum_type":"validation_result_enum","field":"validation_result","type":"enum"}],"type":"I18nData","field":"i18n_data"}],"type":"PhoneNumber","field":"phone_number"}],"field":"phone_lookup"},{"field":"email_lookup","subtypes":[{"type":"string","field":"email","is_enum":0,"is_complex_type":0,"full_field":"request.other_invitee_id.lookup_method[0].email_lookup.email","full_type":"TYPE_STRING","is_simple_type":1}],"type":"ClientEmailLookup","full_field":"request.other_invitee_id.lookup_method[0].email_lookup","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientInviteeId.ClientLookupMethod.ClientEmailLookup","is_enum":0,"package":"chat.frontend.ClientInviteeId.ClientLookupMethod","is_complex_type":1},{"type":"ClientNameLookup","subtypes":[{"type":"string","field":"partial_name","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.other_invitee_id.lookup_method[0].name_lookup.partial_name"}],"field":"name_lookup","package":"chat.frontend.ClientInviteeId.ClientLookupMethod","is_enum":0,"is_complex_type":1,"full_field":"request.other_invitee_id.lookup_method[0].name_lookup","full_type":"type.googleapis.com/chat.frontend.ClientInviteeId.ClientLookupMethod.ClientNameLookup","is_simple_type":0}],"type":"ClientLookupMethod","repeated":1,"field":"lookup_method"},{"field":"phone","subtypes":[{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.other_invitee_id.phone.e164","is_complex_type":0,"is_enum":0,"field":"e164","type":"string"},{"full_field":"request.other_invitee_id.phone.i18n_data","is_simple_type":0,"full_type":"type.googleapis.com/voice.PhoneNumber.I18nData","is_enum":0,"package":"voice.PhoneNumber","is_complex_type":1,"field":"i18n_data","subtypes":[{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.other_invitee_id.phone.i18n_data.national_number","type":"string","field":"national_number"},{"field":"international_number","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.other_invitee_id.phone.i18n_data.international_number","is_complex_type":0,"is_enum":0},{"is_enum":0,"is_complex_type":0,"full_field":"request.other_invitee_id.phone.i18n_data.country_code","is_simple_type":1,"full_type":"TYPE_INT32","type":"int32","field":"country_code"},{"type":"string","field":"region_code","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.other_invitee_id.phone.i18n_data.region_code"},{"field":"i18n_data","type":"bool","full_field":"request.other_invitee_id.phone.i18n_data","full_type":"BOOL","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"field":"validation_result","enum_type":"validation_result_enum","type":"enum","full_field":"request.other_invitee_id.phone.i18n_data.validation_result","is_simple_type":1,"full_type":"TYPE_ENUM","is_enum":1,"is_complex_type":0}],"type":"I18nData"}],"type":"PhoneNumber","full_type":"type.googleapis.com/voice.PhoneNumber","is_simple_type":0,"full_field":"request.other_invitee_id.phone","is_complex_type":1,"package":"voice","is_enum":0}],"full_type":"type.googleapis.com/chat.frontend.ClientInviteeId","is_simple_type":0,"full_field":"request.other_invitee_id","is_complex_type":1,"is_enum":0,"package":"chat.frontend"},{"is_complex_type":1,"package":"chat.frontend","is_enum":0,"full_type":"type.googleapis.com/chat.frontend.ClientLocationSpec","is_simple_type":0,"full_field":"request.attach_location","type":"ClientLocationSpec","subtypes":[{"package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.attach_location.place","is_simple_type":0,"full_type":"type.googleapis.com/embeds.PlaceV2","subtypes":[{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.url","is_complex_type":0,"is_enum":0,"field":"url","type":"string"},{"field":"image_url","type":"string","full_field":"request.attach_location.place.image_url","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.name","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"name"},{"field":"description","type":"string","full_field":"request.attach_location.place.description","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.description_truncated","is_complex_type":0,"is_enum":0,"field":"description_truncated","type":"string"},{"full_field":"request.attach_location.place.proxied_image","full_type":"type.googleapis.com/embeds.Thumbnail","is_simple_type":0,"is_enum":0,"package":"embeds","is_complex_type":1,"field":"proxied_image","type":"Thumbnail","subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.proxied_image.image_url","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"image_url"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_INT32","is_simple_type":1,"full_field":"request.attach_location.place.proxied_image.box_width_px","type":"int32","field":"box_width_px"},{"full_field":"request.attach_location.place.proxied_image.box_height_px","is_simple_type":1,"full_type":"TYPE_INT32","is_enum":0,"is_complex_type":0,"field":"box_height_px","type":"int32"},{"type":"bool","field":"proxied_image","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"BOOL","full_field":"request.attach_location.place.proxied_image"},{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.proxied_image","is_simple_type":1,"full_type":"BOOL","type":"bool","field":"proxied_image"},{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.proxied_image","full_type":"BOOL","is_simple_type":1,"type":"bool","field":"proxied_image"},{"field":"uncropped_image_url","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.proxied_image.uncropped_image_url","is_complex_type":0,"is_enum":0},{"type":"int32","field":"image_height_px","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_INT32","full_field":"request.attach_location.place.proxied_image.image_height_px"},{"field":"safe_mobile_url","subtypes":[{"is_complex_type":0,"is_enum":1,"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.attach_location.place.proxied_image.safe_mobile_url.url_format","type":"enum","enum_type":"url_format_enum","field":"url_format"},{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.proxied_image.safe_mobile_url.url","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"url"}],"type":"SafeMobileUrl","is_simple_type":0,"full_type":"type.googleapis.com/embeds.SafeMobileUrl","full_field":"request.attach_location.place.proxied_image.safe_mobile_url","is_complex_type":1,"is_enum":0,"package":"embeds"}]},{"type":"string","field":"proxied_favicon_url","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.proxied_favicon_url"},{"full_type":"type.googleapis.com/embeds.EmbedClientItem","is_simple_type":0,"full_field":"request.attach_location.place.author","is_complex_type":1,"is_enum":0,"package":"embeds","field":"author","subtypes":[{"is_complex_type":0,"is_enum":1,"full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.attach_location.place.author[0].type","type":"enum","enum_type":"type_enum","field":"type"},{"field":"id","type":"string","full_field":"request.attach_location.place.author[0].id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"type":"string","field":"canonical_id","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.author[0].canonical_id","full_type":"TYPE_STRING","is_simple_type":1},{"package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.attach_location.place.author[0].deep_link_data","is_simple_type":0,"full_type":"type.googleapis.com/embeds.DeepLinkData","type":"DeepLinkData","subtypes":[{"type":"int64","field":"app_id","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.author[0].deep_link_data.app_id","is_simple_type":1,"full_type":"TYPE_INT64"},{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.author[0].deep_link_data.deep_link_id","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"deep_link_id"},{"package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.attach_location.place.author[0].deep_link_data.client","is_simple_type":0,"full_type":"type.googleapis.com/embeds.PackagingServiceClient","repeated":1,"subtypes":[{"type":"enum","field":"type","enum_type":"type_enum","is_enum":1,"is_complex_type":0,"full_field":"request.attach_location.place.author[0].deep_link_data.client[0].type","is_simple_type":1,"full_type":"TYPE_ENUM"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.author[0].deep_link_data.client[0].android_package_name","type":"string","field":"android_package_name"},{"type":"string","field":"ios_bundle_id","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.author[0].deep_link_data.client[0].ios_bundle_id","full_type":"TYPE_STRING","is_simple_type":1},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.author[0].deep_link_data.client[0].ios_app_store_id","type":"string","field":"ios_app_store_id"}],"type":"PackagingServiceClient","field":"client"},{"field":"url","type":"string","full_field":"request.attach_location.place.author[0].deep_link_data.url","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0}],"field":"deep_link_data"},{"is_complex_type":1,"package":"embeds","is_enum":0,"full_type":"type.googleapis.com/embeds.TransientData","is_simple_type":0,"full_field":"request.attach_location.place.author[0].transient_data","type":"TransientData","subtypes":[],"field":"transient_data"},{"full_field":"request.attach_location.place.author[0].signature","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"signature","type":"string"},{"is_complex_type":1,"is_enum":0,"package":"embeds","is_simple_type":0,"full_type":"type.googleapis.com/embeds.Provenance","full_field":"request.attach_location.place.author[0].provenance","subtypes":[{"field":"retrieved_timestamp_msec","type":"uint64","is_simple_type":1,"full_type":"TYPE_UINT64","full_field":"request.attach_location.place.author[0].provenance.retrieved_timestamp_msec","is_complex_type":0,"is_enum":0},{"field":"input_url","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.author[0].provenance.input_url","is_complex_type":0,"is_enum":0},{"type":"string","field":"retrieved_url","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.author[0].provenance.retrieved_url","is_simple_type":1,"full_type":"TYPE_STRING"},{"type":"string","field":"canonical_url","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.author[0].provenance.canonical_url","is_simple_type":1,"full_type":"TYPE_STRING"},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.author[0].provenance.itemtype","is_complex_type":0,"is_enum":0,"field":"itemtype","type":"string"}],"type":"Provenance","field":"provenance"},{"type":"string","field":"render_id","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.author[0].render_id","is_simple_type":1,"full_type":"TYPE_STRING"}],"type":"EmbedClientItem","repeated":1},{"is_complex_type":1,"package":"embeds","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/embeds.EmbedClientItem","full_field":"request.attach_location.place.about","subtypes":[{"type":"enum","field":"type","is_complex_type":0,"is_enum":1,"full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.attach_location.place.about.type"},{"full_field":"request.attach_location.place.about.id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"id","type":"string"},{"type":"string","field":"canonical_id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.about.canonical_id"},{"type":"DeepLinkData","subtypes":[{"full_field":"request.attach_location.place.about.deep_link_data.app_id","is_simple_type":1,"full_type":"TYPE_INT64","is_enum":0,"is_complex_type":0,"field":"app_id","type":"int64"},{"type":"string","field":"deep_link_id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.about.deep_link_data.deep_link_id"},{"full_field":"request.attach_location.place.about.deep_link_data.client","full_type":"type.googleapis.com/embeds.PackagingServiceClient","is_simple_type":0,"is_enum":0,"package":"embeds","is_complex_type":1,"field":"client","repeated":1,"type":"PackagingServiceClient","subtypes":[{"type":"enum","field":"type","is_enum":1,"is_complex_type":0,"full_field":"request.attach_location.place.about.deep_link_data.client[0].type","full_type":"TYPE_ENUM","is_simple_type":1},{"field":"android_package_name","type":"string","full_field":"request.attach_location.place.about.deep_link_data.client[0].android_package_name","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.about.deep_link_data.client[0].ios_bundle_id","is_complex_type":0,"is_enum":0,"field":"ios_bundle_id","type":"string"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.about.deep_link_data.client[0].ios_app_store_id","type":"string","field":"ios_app_store_id"}]},{"type":"string","field":"url","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.about.deep_link_data.url","is_simple_type":1,"full_type":"TYPE_STRING"}],"field":"deep_link_data","is_complex_type":1,"is_enum":0,"package":"embeds","full_type":"type.googleapis.com/embeds.DeepLinkData","is_simple_type":0,"full_field":"request.attach_location.place.about.deep_link_data"},{"is_simple_type":0,"full_type":"type.googleapis.com/embeds.TransientData","full_field":"request.attach_location.place.about.transient_data","is_complex_type":1,"package":"embeds","is_enum":0,"field":"transient_data","subtypes":[],"type":"TransientData"},{"full_field":"request.attach_location.place.about.signature","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"signature","type":"string"},{"type":"Provenance","subtypes":[{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_UINT64","is_simple_type":1,"full_field":"request.attach_location.place.about.provenance.retrieved_timestamp_msec","type":"uint64","field":"retrieved_timestamp_msec"},{"field":"input_url","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.about.provenance.input_url","is_complex_type":0,"is_enum":0},{"field":"retrieved_url","type":"string","full_field":"request.attach_location.place.about.provenance.retrieved_url","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.about.provenance.canonical_url","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"canonical_url"},{"type":"string","field":"itemtype","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.about.provenance.itemtype","full_type":"TYPE_STRING","is_simple_type":1}],"field":"provenance","is_enum":0,"package":"embeds","is_complex_type":1,"full_field":"request.attach_location.place.about.provenance","is_simple_type":0,"full_type":"type.googleapis.com/embeds.Provenance"},{"field":"render_id","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.about.render_id","is_complex_type":0,"is_enum":0}],"type":"EmbedClientItem","field":"about"},{"is_simple_type":0,"field":"unknown_any_field","is_complex_type":0,"type":"any","is_enum":0},{"field":"related_image","repeated":1,"subtypes":[{"full_field":"request.attach_location.place.related_image[0].type","is_simple_type":1,"full_type":"TYPE_ENUM","is_enum":1,"is_complex_type":0,"field":"type","type":"enum"},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.related_image[0].id","is_complex_type":0,"is_enum":0,"field":"id","type":"string"},{"field":"canonical_id","type":"string","full_field":"request.attach_location.place.related_image[0].canonical_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.attach_location.place.related_image[0].deep_link_data","is_simple_type":0,"full_type":"type.googleapis.com/embeds.DeepLinkData","subtypes":[{"is_simple_type":1,"full_type":"TYPE_INT64","full_field":"request.attach_location.place.related_image[0].deep_link_data.app_id","is_complex_type":0,"is_enum":0,"field":"app_id","type":"int64"},{"type":"string","field":"deep_link_id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.related_image[0].deep_link_data.deep_link_id"},{"subtypes":[{"is_complex_type":0,"is_enum":1,"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.attach_location.place.related_image[0].deep_link_data.client[0].type","type":"enum","field":"type"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.place.related_image[0].deep_link_data.client[0].android_package_name","type":"string","field":"android_package_name"},{"type":"string","field":"ios_bundle_id","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.related_image[0].deep_link_data.client[0].ios_bundle_id","is_simple_type":1,"full_type":"TYPE_STRING"},{"type":"string","field":"ios_app_store_id","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.related_image[0].deep_link_data.client[0].ios_app_store_id","is_simple_type":1,"full_type":"TYPE_STRING"}],"type":"PackagingServiceClient","repeated":1,"field":"client","is_complex_type":1,"is_enum":0,"package":"embeds","full_type":"type.googleapis.com/embeds.PackagingServiceClient","is_simple_type":0,"full_field":"request.attach_location.place.related_image[0].deep_link_data.client"},{"type":"string","field":"url","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.related_image[0].deep_link_data.url","is_simple_type":1,"full_type":"TYPE_STRING"}],"type":"DeepLinkData","field":"deep_link_data"},{"field":"transient_data","type":"TransientData","subtypes":[],"full_type":"type.googleapis.com/embeds.TransientData","is_simple_type":0,"full_field":"request.attach_location.place.related_image[0].transient_data","is_complex_type":1,"package":"embeds","is_enum":0},{"field":"signature","type":"string","full_field":"request.attach_location.place.related_image[0].signature","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"type":"Provenance","subtypes":[{"is_simple_type":1,"full_type":"TYPE_UINT64","full_field":"request.attach_location.place.related_image[0].provenance.retrieved_timestamp_msec","is_complex_type":0,"is_enum":0,"field":"retrieved_timestamp_msec","type":"uint64"},{"field":"input_url","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.related_image[0].provenance.input_url","is_complex_type":0,"is_enum":0},{"type":"string","field":"retrieved_url","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.related_image[0].provenance.retrieved_url","is_simple_type":1,"full_type":"TYPE_STRING"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.attach_location.place.related_image[0].provenance.canonical_url","is_complex_type":0,"is_enum":0,"field":"canonical_url","type":"string"},{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.related_image[0].provenance.itemtype","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"itemtype"}],"field":"provenance","is_complex_type":1,"is_enum":0,"package":"embeds","full_type":"type.googleapis.com/embeds.Provenance","is_simple_type":0,"full_field":"request.attach_location.place.related_image[0].provenance"},{"field":"render_id","type":"string","full_field":"request.attach_location.place.related_image[0].render_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0}],"type":"EmbedClientItem","full_field":"request.attach_location.place.related_image","full_type":"type.googleapis.com/embeds.EmbedClientItem","is_simple_type":0,"is_enum":0,"package":"embeds","is_complex_type":1},{"is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.place.source_name","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"source_name"}],"type":"PlaceV2","field":"place"},{"type":"bytes","field":"deprecated_2","is_enum":0,"is_complex_type":0,"full_field":"request.attach_location.deprecated_2","full_type":"TYPE_BYTES","is_simple_type":1},{"full_field":"request.attach_location.client_metadata","full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","is_simple_type":0,"is_enum":0,"package":"chat.frontend","is_complex_type":1,"field":"client_metadata","type":"ClientClientGeneratedAttachmentMetadata","subtypes":[{"type":"string","field":"id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.attach_location.client_metadata.id"}]}],"field":"attach_location"},{"field":"external_image_spec","type":"ClientExternalImageSpec","subtypes":[{"full_field":"request.external_image_spec.image_url","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"image_url","type":"string"},{"full_field":"request.external_image_spec.width","is_simple_type":1,"full_type":"TYPE_INT32","is_enum":0,"is_complex_type":0,"field":"width","type":"int32"},{"full_field":"request.external_image_spec.height","full_type":"TYPE_INT32","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"height","type":"int32"},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.external_image_spec.containing_webpage_url","is_complex_type":0,"is_enum":0,"field":"containing_webpage_url","type":"string"},{"field":"containing_webpage_title","type":"string","full_field":"request.external_image_spec.containing_webpage_title","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"field":"description","type":"string","full_field":"request.external_image_spec.description","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"is_complex_type":1,"is_enum":0,"package":"chat.frontend","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","full_field":"request.external_image_spec.client_metadata","subtypes":[{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.external_image_spec.client_metadata.id","is_complex_type":0,"is_enum":0,"field":"id","type":"string"}],"type":"ClientClientGeneratedAttachmentMetadata","field":"client_metadata"}],"is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientExternalImageSpec","full_field":"request.external_image_spec","is_complex_type":1,"is_enum":0,"package":"chat.frontend"},{"is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientChatMessageSpec","full_field":"request.chat_message_spec","is_complex_type":1,"package":"chat.frontend","is_enum":0,"field":"chat_message_spec","subtypes":[{"repeated":1,"type":"Segment","subtypes":[{"type":"enum","field":"type","enum_type":"type_enum","is_enum":1,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].type","is_simple_type":1,"full_type":"TYPE_ENUM"},{"field":"text","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].segment[0].text","is_complex_type":0,"is_enum":0},{"is_complex_type":1,"is_enum":0,"package":"social.common","is_simple_type":0,"full_type":"type.googleapis.com/social.common.Formatting","full_field":"request.chat_message_spec[0].segment[0].formatting","subtypes":[{"field":"formatting","type":"bool","full_field":"request.chat_message_spec[0].segment[0].formatting","full_type":"BOOL","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].formatting","full_type":"BOOL","is_simple_type":1,"type":"bool","field":"formatting"},{"is_simple_type":1,"full_type":"BOOL","full_field":"request.chat_message_spec[0].segment[0].formatting","is_complex_type":0,"is_enum":0,"field":"formatting","type":"bool"},{"full_field":"request.chat_message_spec[0].segment[0].formatting","full_type":"BOOL","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"formatting","type":"bool"},{"type":"enum","field":"style","enum_type":"style_enum","is_enum":1,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].formatting.style","is_simple_type":1,"full_type":"TYPE_ENUM"},{"field":"formatting","type":"bool","full_field":"request.chat_message_spec[0].segment[0].formatting","full_type":"BOOL","is_simple_type":1,"is_enum":0,"is_complex_type":0}],"type":"Formatting","field":"formatting"},{"type":"LinkData","subtypes":[{"field":"link_target","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.link_target","is_complex_type":0,"is_enum":0},{"type":"string","field":"display_url","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.display_url","is_simple_type":1,"full_type":"TYPE_STRING"},{"package":"social.common.attachment","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment","is_simple_type":0,"full_type":"type.googleapis.com/social.common.attachment.Attachment","type":"Attachment","subtypes":[{"is_complex_type":1,"is_enum":0,"package":"embeds","full_type":"type.googleapis.com/embeds.EmbedClientItem","is_simple_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item","type":"EmbedClientItem","subtypes":[{"full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.type","is_complex_type":0,"is_enum":1,"enum_type":"type_enum","field":"type","type":"enum"},{"type":"string","field":"id","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.id"},{"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.canonical_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"canonical_id","type":"string"},{"full_type":"type.googleapis.com/embeds.DeepLinkData","is_simple_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data","is_complex_type":1,"package":"embeds","is_enum":0,"field":"deep_link_data","type":"DeepLinkData","subtypes":[{"type":"int64","field":"app_id","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data.app_id","full_type":"TYPE_INT64","is_simple_type":1},{"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data.deep_link_id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"deep_link_id","type":"string"},{"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data.client","is_simple_type":0,"full_type":"type.googleapis.com/embeds.PackagingServiceClient","package":"embeds","is_enum":0,"is_complex_type":1,"field":"client","repeated":1,"type":"PackagingServiceClient","subtypes":[{"is_complex_type":0,"is_enum":1,"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data.client[0].type","type":"enum","enum_type":"type_enum","field":"type"},{"field":"android_package_name","type":"string","full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data.client[0].android_package_name","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0},{"type":"string","field":"ios_bundle_id","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data.client[0].ios_bundle_id","is_simple_type":1,"full_type":"TYPE_STRING"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data.client[0].ios_app_store_id","is_complex_type":0,"is_enum":0,"field":"ios_app_store_id","type":"string"}]},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.deep_link_data.url","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"url"}]},{"type":"TransientData","subtypes":[],"field":"transient_data","is_complex_type":1,"package":"embeds","is_enum":0,"full_type":"type.googleapis.com/embeds.TransientData","is_simple_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.transient_data"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.signature","type":"string","field":"signature"},{"subtypes":[{"type":"uint64","field":"retrieved_timestamp_msec","is_complex_type":0,"is_enum":0,"full_type":"TYPE_UINT64","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.provenance.retrieved_timestamp_msec"},{"type":"string","field":"input_url","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.provenance.input_url"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.provenance.retrieved_url","type":"string","field":"retrieved_url"},{"field":"canonical_url","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.provenance.canonical_url","is_complex_type":0,"is_enum":0},{"type":"string","field":"itemtype","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.provenance.itemtype","full_type":"TYPE_STRING","is_simple_type":1}],"type":"Provenance","field":"provenance","package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.provenance","is_simple_type":0,"full_type":"type.googleapis.com/embeds.Provenance"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.embed_item.render_id","is_complex_type":0,"is_enum":0,"field":"render_id","type":"string"}],"field":"embed_item"},{"is_simple_type":0,"field":"unknown_any_field","is_complex_type":0,"type":"any","is_enum":0},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].segment[0].link_data.attachment.id","is_complex_type":0,"is_enum":0,"field":"id","type":"string"}],"field":"attachment"},{"type":"string","field":"title","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].segment[0].link_data.title"},{"enum_type":"attachment_render_hint_enum","field":"attachment_render_hint","type":"enum","full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data.attachment_render_hint","is_complex_type":0,"is_enum":1},{"is_enum":1,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].link_data.link_type","is_simple_type":1,"full_type":"TYPE_ENUM","type":"enum","field":"link_type","enum_type":"link_type_enum"}],"field":"link_data","package":"social.common","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].segment[0].link_data","full_type":"type.googleapis.com/social.common.LinkData","is_simple_type":0},{"is_complex_type":1,"package":"social.common","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/social.common.UserMentionData","full_field":"request.chat_message_spec[0].segment[0].user_mention_data","type":"UserMentionData","subtypes":[{"type":"int64","field":"user_gaia_id","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].user_mention_data.user_gaia_id","is_simple_type":1,"full_type":"TYPE_INT64"},{"full_field":"request.chat_message_spec[0].segment[0].user_mention_data.user_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"user_id","type":"string"},{"full_field":"request.chat_message_spec[0].segment[0].user_mention_data.email","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"email","type":"string"},{"is_complex_type":1,"package":"security.credentials","is_enum":0,"full_type":"type.googleapis.com/security.credentials.PrincipalProto","is_simple_type":0,"full_field":"request.chat_message_spec[0].segment[0].user_mention_data.user","type":"PrincipalProto","subtypes":[{"field":"scope","enum_type":"scope_enum","type":"enum","full_field":"request.chat_message_spec[0].segment[0].user_mention_data.user.scope","is_simple_type":1,"full_type":"TYPE_ENUM","is_enum":1,"is_complex_type":0}],"field":"user"}],"field":"user_mention_data"},{"is_complex_type":1,"is_enum":0,"package":"social.common","full_type":"type.googleapis.com/social.common.HashtagData","is_simple_type":0,"full_field":"request.chat_message_spec[0].segment[0].hashtag_data","type":"HashtagData","subtypes":[{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].segment[0].hashtag_data.search_text","is_complex_type":0,"is_enum":0,"field":"search_text","type":"string"},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].segment[0].hashtag_data.search_text","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"search_text"},{"full_field":"request.chat_message_spec[0].segment[0].hashtag_data.search_text","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"search_text","type":"string"},{"field":"search_text","type":"string","full_field":"request.chat_message_spec[0].segment[0].hashtag_data.search_text","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].segment[0].hashtag_data.search_text","type":"string","field":"search_text"}],"field":"hashtag_data"}],"field":"segment","package":"social.common","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].segment","is_simple_type":0,"full_type":"type.googleapis.com/social.common.Segment"},{"subtypes":[{"subtypes":[{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].media_server_item.existing_media.owner_gaia_id","type":"string","field":"owner_gaia_id"},{"type":"string","field":"media_id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].media_server_item.existing_media.media_id"},{"field":"existing_media","type":"bool","full_field":"request.chat_message_spec[0].media_server_item.existing_media","is_simple_type":1,"full_type":"BOOL","is_enum":0,"is_complex_type":0},{"type":"bool","field":"existing_media","is_complex_type":0,"is_enum":0,"full_type":"BOOL","is_simple_type":1,"full_field":"request.chat_message_spec[0].media_server_item.existing_media"}],"type":"ExistingMedia","field":"existing_media","is_complex_type":1,"is_enum":0,"package":"chat.frontend.ClientMediaServerItem","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientMediaServerItem.ExistingMedia","full_field":"request.chat_message_spec[0].media_server_item.existing_media"},{"field":"uploaded_media","type":"UploadedMedia","subtypes":[{"field":"uploaded_media","type":"bool","full_field":"request.chat_message_spec[0].media_server_item.uploaded_media","full_type":"BOOL","is_simple_type":1,"is_enum":0,"is_complex_type":0}],"full_field":"request.chat_message_spec[0].media_server_item.uploaded_media","full_type":"type.googleapis.com/chat.frontend.ClientMediaServerItem.UploadedMedia","is_simple_type":0,"is_enum":0,"package":"chat.frontend.ClientMediaServerItem","is_complex_type":1},{"field":"audio_options","type":"AudioOptions","subtypes":[{"full_field":"request.chat_message_spec[0].media_server_item.audio_options.duration_ms","is_simple_type":1,"full_type":"TYPE_INT64","is_enum":0,"is_complex_type":0,"field":"duration_ms","type":"int64"}],"full_field":"request.chat_message_spec[0].media_server_item.audio_options","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientMediaServerItem.AudioOptions","is_enum":0,"package":"chat.frontend.ClientMediaServerItem","is_complex_type":1},{"type":"ClientClientGeneratedAttachmentMetadata","subtypes":[{"full_field":"request.chat_message_spec[0].media_server_item.client_metadata.id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"id","type":"string"}],"field":"client_metadata","is_complex_type":1,"package":"chat.frontend","is_enum":0,"full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","is_simple_type":0,"full_field":"request.chat_message_spec[0].media_server_item.client_metadata"}],"type":"ClientMediaServerItem","field":"media_server_item","package":"chat.frontend","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].media_server_item","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientMediaServerItem"},{"full_field":"request.chat_message_spec[0].attach_location","full_type":"type.googleapis.com/chat.frontend.ClientLocationSpec","is_simple_type":0,"package":"chat.frontend","is_enum":0,"is_complex_type":1,"field":"attach_location","type":"ClientLocationSpec","subtypes":[{"subtypes":[{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.url","is_complex_type":0,"is_enum":0,"field":"url","type":"string"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.image_url","is_complex_type":0,"is_enum":0,"field":"image_url","type":"string"},{"field":"name","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.name","is_complex_type":0,"is_enum":0},{"type":"string","field":"description","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.description","is_simple_type":1,"full_type":"TYPE_STRING"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.description_truncated","is_complex_type":0,"is_enum":0,"field":"description_truncated","type":"string"},{"full_type":"type.googleapis.com/embeds.Thumbnail","is_simple_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image","is_complex_type":1,"is_enum":0,"package":"embeds","field":"proxied_image","subtypes":[{"field":"image_url","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.proxied_image.image_url","is_complex_type":0,"is_enum":0},{"type":"int32","field":"box_width_px","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image.box_width_px","full_type":"TYPE_INT32","is_simple_type":1},{"full_type":"TYPE_INT32","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image.box_height_px","is_complex_type":0,"is_enum":0,"field":"box_height_px","type":"int32"},{"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image","is_simple_type":1,"full_type":"BOOL","is_enum":0,"is_complex_type":0,"field":"proxied_image","type":"bool"},{"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image","is_simple_type":1,"full_type":"BOOL","is_enum":0,"is_complex_type":0,"field":"proxied_image","type":"bool"},{"is_simple_type":1,"full_type":"BOOL","full_field":"request.chat_message_spec[0].attach_location.place.proxied_image","is_complex_type":0,"is_enum":0,"field":"proxied_image","type":"bool"},{"field":"uncropped_image_url","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image.uncropped_image_url","is_complex_type":0,"is_enum":0},{"type":"int32","field":"image_height_px","is_complex_type":0,"is_enum":0,"full_type":"TYPE_INT32","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image.image_height_px"},{"is_complex_type":1,"is_enum":0,"package":"embeds","full_type":"type.googleapis.com/embeds.SafeMobileUrl","is_simple_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image.safe_mobile_url","subtypes":[{"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image.safe_mobile_url.url_format","full_type":"TYPE_ENUM","is_simple_type":1,"is_enum":1,"is_complex_type":0,"field":"url_format","enum_type":"url_format_enum","type":"enum"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.proxied_image.safe_mobile_url.url","type":"string","field":"url"}],"type":"SafeMobileUrl","field":"safe_mobile_url"}],"type":"Thumbnail"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.proxied_favicon_url","type":"string","field":"proxied_favicon_url"},{"field":"author","repeated":1,"subtypes":[{"type":"enum","enum_type":"type_enum","field":"type","is_complex_type":0,"is_enum":1,"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.chat_message_spec[0].attach_location.place.author[0].type"},{"type":"string","field":"id","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].id"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].canonical_id","is_complex_type":0,"is_enum":0,"field":"canonical_id","type":"string"},{"type":"DeepLinkData","subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data.app_id","full_type":"TYPE_INT64","is_simple_type":1,"type":"int64","field":"app_id"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data.deep_link_id","is_complex_type":0,"is_enum":0,"field":"deep_link_id","type":"string"},{"subtypes":[{"field":"type","enum_type":"type_enum","type":"enum","full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data.client[0].type","full_type":"TYPE_ENUM","is_simple_type":1,"is_enum":1,"is_complex_type":0},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data.client[0].android_package_name","type":"string","field":"android_package_name"},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data.client[0].ios_bundle_id","is_complex_type":0,"is_enum":0,"field":"ios_bundle_id","type":"string"},{"type":"string","field":"ios_app_store_id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data.client[0].ios_app_store_id"}],"type":"PackagingServiceClient","repeated":1,"field":"client","is_complex_type":1,"package":"embeds","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/embeds.PackagingServiceClient","full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data.client"},{"type":"string","field":"url","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data.url","is_simple_type":1,"full_type":"TYPE_STRING"}],"field":"deep_link_data","is_enum":0,"package":"embeds","is_complex_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].deep_link_data","is_simple_type":0,"full_type":"type.googleapis.com/embeds.DeepLinkData"},{"full_field":"request.chat_message_spec[0].attach_location.place.author[0].transient_data","is_simple_type":0,"full_type":"type.googleapis.com/embeds.TransientData","is_enum":0,"package":"embeds","is_complex_type":1,"field":"transient_data","type":"TransientData","subtypes":[]},{"field":"signature","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.author[0].signature","is_complex_type":0,"is_enum":0},{"full_field":"request.chat_message_spec[0].attach_location.place.author[0].provenance","is_simple_type":0,"full_type":"type.googleapis.com/embeds.Provenance","is_enum":0,"package":"embeds","is_complex_type":1,"field":"provenance","type":"Provenance","subtypes":[{"field":"retrieved_timestamp_msec","type":"uint64","full_field":"request.chat_message_spec[0].attach_location.place.author[0].provenance.retrieved_timestamp_msec","is_simple_type":1,"full_type":"TYPE_UINT64","is_enum":0,"is_complex_type":0},{"full_field":"request.chat_message_spec[0].attach_location.place.author[0].provenance.input_url","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"input_url","type":"string"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].provenance.retrieved_url","type":"string","field":"retrieved_url"},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].provenance.canonical_url","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"canonical_url"},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.author[0].provenance.itemtype","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"itemtype"}]},{"type":"string","field":"render_id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.author[0].render_id"}],"type":"EmbedClientItem","full_field":"request.chat_message_spec[0].attach_location.place.author","is_simple_type":0,"full_type":"type.googleapis.com/embeds.EmbedClientItem","is_enum":0,"package":"embeds","is_complex_type":1},{"field":"about","subtypes":[{"field":"type","type":"enum","full_type":"TYPE_ENUM","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.about.type","is_complex_type":0,"is_enum":1},{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.about.id","is_complex_type":0,"is_enum":0,"field":"id","type":"string"},{"type":"string","field":"canonical_id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.about.canonical_id"},{"package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data","full_type":"type.googleapis.com/embeds.DeepLinkData","is_simple_type":0,"type":"DeepLinkData","subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data.app_id","is_simple_type":1,"full_type":"TYPE_INT64","type":"int64","field":"app_id"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data.deep_link_id","type":"string","field":"deep_link_id"},{"full_type":"type.googleapis.com/embeds.PackagingServiceClient","is_simple_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data.client","is_complex_type":1,"is_enum":0,"package":"embeds","field":"client","type":"PackagingServiceClient","subtypes":[{"field":"type","type":"enum","is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data.client[0].type","is_complex_type":0,"is_enum":1},{"type":"string","field":"android_package_name","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data.client[0].android_package_name","is_simple_type":1,"full_type":"TYPE_STRING"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data.client[0].ios_bundle_id","type":"string","field":"ios_bundle_id"},{"full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data.client[0].ios_app_store_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"ios_app_store_id","type":"string"}],"repeated":1},{"full_field":"request.chat_message_spec[0].attach_location.place.about.deep_link_data.url","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"url","type":"string"}],"field":"deep_link_data"},{"package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.about.transient_data","is_simple_type":0,"full_type":"type.googleapis.com/embeds.TransientData","subtypes":[],"type":"TransientData","field":"transient_data"},{"field":"signature","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.about.signature","is_complex_type":0,"is_enum":0},{"subtypes":[{"type":"uint64","field":"retrieved_timestamp_msec","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_UINT64","full_field":"request.chat_message_spec[0].attach_location.place.about.provenance.retrieved_timestamp_msec"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.about.provenance.input_url","type":"string","field":"input_url"},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.about.provenance.retrieved_url","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"retrieved_url"},{"type":"string","field":"canonical_url","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.about.provenance.canonical_url"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.about.provenance.itemtype","type":"string","field":"itemtype"}],"type":"Provenance","field":"provenance","is_enum":0,"package":"embeds","is_complex_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.about.provenance","full_type":"type.googleapis.com/embeds.Provenance","is_simple_type":0},{"full_field":"request.chat_message_spec[0].attach_location.place.about.render_id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"render_id","type":"string"}],"type":"EmbedClientItem","is_simple_type":0,"full_type":"type.googleapis.com/embeds.EmbedClientItem","full_field":"request.chat_message_spec[0].attach_location.place.about","is_complex_type":1,"package":"embeds","is_enum":0},{"is_complex_type":0,"type":"any","is_enum":0,"is_simple_type":0,"field":"unknown_any_field"},{"package":"embeds","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.related_image","full_type":"type.googleapis.com/embeds.EmbedClientItem","is_simple_type":0,"repeated":1,"type":"EmbedClientItem","subtypes":[{"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].type","is_simple_type":1,"full_type":"TYPE_ENUM","is_enum":1,"is_complex_type":0,"field":"type","type":"enum"},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].id","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"id"},{"field":"canonical_id","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].canonical_id","is_complex_type":0,"is_enum":0},{"field":"deep_link_data","subtypes":[{"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data.app_id","full_type":"TYPE_INT64","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"app_id","type":"int64"},{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data.deep_link_id","type":"string","field":"deep_link_id"},{"is_complex_type":1,"package":"embeds","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/embeds.PackagingServiceClient","full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data.client","subtypes":[{"is_simple_type":1,"full_type":"TYPE_ENUM","full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data.client[0].type","is_complex_type":0,"is_enum":1,"field":"type","type":"enum"},{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data.client[0].android_package_name","type":"string","field":"android_package_name"},{"type":"string","field":"ios_bundle_id","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data.client[0].ios_bundle_id"},{"field":"ios_app_store_id","type":"string","full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data.client[0].ios_app_store_id","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0}],"type":"PackagingServiceClient","repeated":1,"field":"client"},{"type":"string","field":"url","is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data.url"}],"type":"DeepLinkData","full_type":"type.googleapis.com/embeds.DeepLinkData","is_simple_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].deep_link_data","is_complex_type":1,"is_enum":0,"package":"embeds"},{"type":"TransientData","subtypes":[],"field":"transient_data","is_complex_type":1,"is_enum":0,"package":"embeds","full_type":"type.googleapis.com/embeds.TransientData","is_simple_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].transient_data"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].signature","is_complex_type":0,"is_enum":0,"field":"signature","type":"string"},{"full_type":"type.googleapis.com/embeds.Provenance","is_simple_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].provenance","is_complex_type":1,"package":"embeds","is_enum":0,"field":"provenance","subtypes":[{"type":"uint64","field":"retrieved_timestamp_msec","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_UINT64","full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].provenance.retrieved_timestamp_msec"},{"field":"input_url","type":"string","full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].provenance.input_url","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"type":"string","field":"retrieved_url","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].provenance.retrieved_url"},{"type":"string","field":"canonical_url","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].provenance.canonical_url","is_simple_type":1,"full_type":"TYPE_STRING"},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].provenance.itemtype","full_type":"TYPE_STRING","is_simple_type":1,"type":"string","field":"itemtype"}],"type":"Provenance"},{"field":"render_id","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.related_image[0].render_id","is_complex_type":0,"is_enum":0}],"field":"related_image"},{"field":"source_name","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.place.source_name","is_complex_type":0,"is_enum":0}],"type":"PlaceV2","field":"place","is_enum":0,"package":"embeds","is_complex_type":1,"full_field":"request.chat_message_spec[0].attach_location.place","is_simple_type":0,"full_type":"type.googleapis.com/embeds.PlaceV2"},{"is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].attach_location.deprecated_2","full_type":"TYPE_BYTES","is_simple_type":1,"type":"bytes","field":"deprecated_2"},{"is_complex_type":1,"package":"chat.frontend","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","full_field":"request.chat_message_spec[0].attach_location.client_metadata","subtypes":[{"is_complex_type":0,"is_enum":0,"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].attach_location.client_metadata.id","type":"string","field":"id"}],"type":"ClientClientGeneratedAttachmentMetadata","field":"client_metadata"}]},{"field":"external_image_spec","type":"ClientExternalImageSpec","subtypes":[{"full_field":"request.chat_message_spec[0].external_image_spec.image_url","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0,"field":"image_url","type":"string"},{"is_simple_type":1,"full_type":"TYPE_INT32","full_field":"request.chat_message_spec[0].external_image_spec.width","is_complex_type":0,"is_enum":0,"field":"width","type":"int32"},{"type":"int32","field":"height","is_enum":0,"is_complex_type":0,"full_field":"request.chat_message_spec[0].external_image_spec.height","is_simple_type":1,"full_type":"TYPE_INT32"},{"type":"string","field":"containing_webpage_url","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].external_image_spec.containing_webpage_url"},{"full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].external_image_spec.containing_webpage_title","is_complex_type":0,"is_enum":0,"field":"containing_webpage_title","type":"string"},{"type":"string","field":"description","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].external_image_spec.description"},{"is_enum":0,"package":"chat.frontend","is_complex_type":1,"full_field":"request.chat_message_spec[0].external_image_spec.client_metadata","full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","is_simple_type":0,"subtypes":[{"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].external_image_spec.client_metadata.id","is_complex_type":0,"is_enum":0,"field":"id","type":"string"}],"type":"ClientClientGeneratedAttachmentMetadata","field":"client_metadata"}],"full_type":"type.googleapis.com/chat.frontend.ClientExternalImageSpec","is_simple_type":0,"full_field":"request.chat_message_spec[0].external_image_spec","is_complex_type":1,"is_enum":0,"package":"chat.frontend"},{"type":"ClientStickerSpec","subtypes":[{"subtypes":[{"field":"id","type":"string","full_field":"request.chat_message_spec[0].sticker_spec.sticker_id.id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0}],"type":"ClientStaticMediaNodeId","field":"sticker_id","is_enum":0,"package":"chat.frontend","is_complex_type":1,"full_field":"request.chat_message_spec[0].sticker_spec.sticker_id","full_type":"type.googleapis.com/chat.frontend.ClientStaticMediaNodeId","is_simple_type":0},{"full_field":"request.chat_message_spec[0].sticker_spec.local_static_media_tree_version","is_simple_type":1,"full_type":"TYPE_STRING","is_enum":0,"is_complex_type":0,"field":"local_static_media_tree_version","type":"string"},{"is_complex_type":1,"package":"chat.frontend","is_enum":0,"is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","full_field":"request.chat_message_spec[0].sticker_spec.client_metadata","subtypes":[{"field":"id","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.chat_message_spec[0].sticker_spec.client_metadata.id","is_complex_type":0,"is_enum":0}],"type":"ClientClientGeneratedAttachmentMetadata","field":"client_metadata"}],"field":"sticker_spec","package":"chat.frontend","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].sticker_spec","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientStickerSpec"},{"type":"ClientQuoteSpec","subtypes":[{"type":"string","field":"original_message_id","is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].quote_spec.original_message_id"},{"is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","full_field":"request.chat_message_spec[0].quote_spec.client_metadata","is_complex_type":1,"is_enum":0,"package":"chat.frontend","field":"client_metadata","subtypes":[{"is_complex_type":0,"is_enum":0,"is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.chat_message_spec[0].quote_spec.client_metadata.id","type":"string","field":"id"}],"type":"ClientClientGeneratedAttachmentMetadata"}],"field":"quote_spec","package":"chat.frontend","is_enum":0,"is_complex_type":1,"full_field":"request.chat_message_spec[0].quote_spec","full_type":"type.googleapis.com/chat.frontend.ClientQuoteSpec","is_simple_type":0}],"type":"ClientChatMessageSpec","repeated":1},{"is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientStickerSpec","full_field":"request.sticker_spec","is_complex_type":1,"package":"chat.frontend","is_enum":0,"field":"sticker_spec","subtypes":[{"subtypes":[{"type":"string","field":"id","is_enum":0,"is_complex_type":0,"full_field":"request.sticker_spec.sticker_id.id","is_simple_type":1,"full_type":"TYPE_STRING"}],"type":"ClientStaticMediaNodeId","field":"sticker_id","is_enum":0,"package":"chat.frontend","is_complex_type":1,"full_field":"request.sticker_spec.sticker_id","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientStaticMediaNodeId"},{"field":"local_static_media_tree_version","type":"string","full_type":"TYPE_STRING","is_simple_type":1,"full_field":"request.sticker_spec.local_static_media_tree_version","is_complex_type":0,"is_enum":0},{"is_complex_type":1,"is_enum":0,"package":"chat.frontend","is_simple_type":0,"full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","full_field":"request.sticker_spec.client_metadata","subtypes":[{"is_enum":0,"is_complex_type":0,"full_field":"request.sticker_spec.client_metadata.id","is_simple_type":1,"full_type":"TYPE_STRING","type":"string","field":"id"}],"type":"ClientClientGeneratedAttachmentMetadata","field":"client_metadata"}],"type":"ClientStickerSpec"},{"subtypes":[{"field":"original_message_id","type":"string","full_field":"request.quote_spec.original_message_id","full_type":"TYPE_STRING","is_simple_type":1,"is_enum":0,"is_complex_type":0},{"field":"client_metadata","type":"ClientClientGeneratedAttachmentMetadata","subtypes":[{"field":"id","type":"string","is_simple_type":1,"full_type":"TYPE_STRING","full_field":"request.quote_spec.client_metadata.id","is_complex_type":0,"is_enum":0}],"full_type":"type.googleapis.com/chat.frontend.ClientClientGeneratedAttachmentMetadata","is_simple_type":0,"full_field":"request.quote_spec.client_metadata","is_complex_type":1,"package":"chat.frontend","is_enum":0}],"type":"ClientQuoteSpec","field":"quote_spec","is_enum":0,"package":"chat.frontend","is_complex_type":1,"full_field":"request.quote_spec","full_type":"type.googleapis.com/chat.frontend.ClientQuoteSpec","is_simple_type":0}]
